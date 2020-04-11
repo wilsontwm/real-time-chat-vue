@@ -68,9 +68,6 @@ export default {
 }
 </script>
 <style scoped>
-    .initial {
-        font-size: 18px;
-    }
     .item {
         min-height: 0;
     }
