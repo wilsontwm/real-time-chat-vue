@@ -1,32 +1,55 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app>
+    <v-app-bar
+      app
+      clipped-left
+      clipped-right
+      color="primary"
+      dark
+    >
+      <div class="d-flex align-center">
+        <v-app-bar-nav-icon class="mr-2" @click="showdrawer = !showdrawer"></v-app-bar-nav-icon>
+        <v-img
+          :src="require('./assets/logo.png')"
+          alt="Real time chat"
+          class="shrink mr-2"
+          contain
+          transition="scale-transition"
+          width="30"
+        />
+        <h4>Real time chat</h4>
+      </div>
+      <v-spacer></v-spacer>
+      <v-btn icon @click="showcontact = !showcontact">
+          <v-icon>contacts</v-icon>
+      </v-btn>
+    </v-app-bar>
+    <NavigationDrawer :showdrawer="showdrawer" />
+    <LoginDialog />
+    <v-content>
+      <router-view></router-view>
+    </v-content>
+    <ContactContainer :showcontact="showcontact" />
+  </v-app>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import NavigationDrawer from './components/NavigationDrawer'
+import LoginDialog from './components/login/LoginDialog'
+import ContactContainer from  './components/contacts/ContactContainer'
 
-#nav {
-  padding: 30px;
+export default {
+  name: 'App',
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+  components: {
+    NavigationDrawer,
+    LoginDialog,
+    ContactContainer
+  },
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
+  data: () => ({
+    showdrawer: true,
+    showcontact: true
+  }),
+};
+</script>
