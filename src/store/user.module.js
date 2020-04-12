@@ -40,15 +40,12 @@ const actions = {
             commit('loginFailure', firebaseLogin.error);
         }        
     },
-    async logout({commit}) {
-        const firebaseLogout = await fb.logout();
-        
-        if(firebaseLogout.success) {
-            if(this.state.userModule.user) {
-                userService.logout(this.state.userModule.user.ID);
-            }
-            commit('logout');
+    logout({commit}) {
+        fb.logout();
+        if(this.state.userModule.user.ID) {
+            userService.logout(this.state.userModule.user.ID);
         }
+        commit('logout');
     }
 }
 

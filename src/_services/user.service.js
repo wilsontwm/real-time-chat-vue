@@ -45,8 +45,7 @@ async function login(uid) {
     return fb.firestore.collection("online").doc(uid).set(data);
 }
 
-async function logout(uid) {
-    console.log("Logout " + uid);
+function logout(uid) {
     return fb.firestore.collection("online").doc(uid).delete();
 }
 

@@ -61,9 +61,14 @@ export default {
     },
     methods: {
         ...mapActions('userModule', ['logout']),
-        async handleLogout(e) {
+        handleLogout(e) {
+            e.preventDefault();
             this.logout();
         }
+    },
+    created() {
+        // Log the user out when exit the window or tab
+        //window.addEventListener('unload', this.handleLogout);
     }
 }
 </script>

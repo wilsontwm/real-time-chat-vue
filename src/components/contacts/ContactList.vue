@@ -1,6 +1,6 @@
 <template>
     <div class="contact-list">
-        <div v-if="isLoading">
+        <div v-if="!isLoaded">
             <v-skeleton-loader type="list-item-avatar-two-line" class="mx-auto"></v-skeleton-loader>
             <v-skeleton-loader type="list-item-avatar-two-line" class="mx-auto"></v-skeleton-loader>
         </div>
@@ -8,6 +8,7 @@
     </div>
 </template>
 <script>
+import { mapState, mapActions } from 'vuex';
 import Contact from './Contact';
 import fb from '@/firebase';
 
@@ -19,21 +20,25 @@ export default {
     props: ['searchInput'],
     data() {
         return {
-            isLoading: true,
-            allUsers: [],
             onlineUsers: []
         }
     },
     computed: {
+        ...mapState('userModule', {
+            userState: state => state.user
+        }),
+        ...mapState('contactModule', {
+            contactState: state => state
+        }),
         sortedUsers() {
             var onlineUsers = [];
             var offlineUsers = [];
             var onlineIds = this.onlineUsers;
 
-            for(var i = 0; i < this.allUsers.length; i++) {
-                var user = this.allUsers[i];
+            for(var i = 0; i < this.contactState.users.length; i++) {
+                var user = this.contactState.users[i];
                 // For online users
-                if(onlineIds.indexOf(this.allUsers[i].id) >= 0) {
+                if(onlineIds.indexOf(this.contactState.users[i].id) >= 0) {
                     user.online = true;
                     onlineUsers.push(user);
                 } else {
@@ -47,9 +52,18 @@ export default {
         },
         filteredUsers() {
             return this.sortedUsers.filter(user => {
-                return user.name.toLowerCase().includes(this.searchInput.toLowerCase()) || user.email.toLowerCase().includes(this.searchInput.toLowerCase());
+                // Filter out self
+                var valid = this.userState ? this.userState.ID != user.id : false;
+                valid = valid && ( user.name.toLowerCase().includes(this.searchInput.toLowerCase()) || user.email.toLowerCase().includes(this.searchInput.toLowerCase()) );
+                return valid;
             });
+        },
+        isLoaded() {            
+            return this.contactState.users && this.contactState.users.length > 0;
         }
+    },
+    methods: {
+        ...mapActions('contactModule', ['allContacts']),
     },
     created() {
         // Get all the users
@@ -62,7 +76,7 @@ export default {
                 users.push(user);
             });
             
-            this.allUsers = users;
+            this.allContacts({users});
             this.isLoading = false;
         });
 

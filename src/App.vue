@@ -27,7 +27,7 @@
     <NavigationDrawer :showdrawer="showdrawer" />
     <LoginDialog />
     <v-content>
-      <router-view></router-view>
+      <MessageContainer />
     </v-content>
     <ContactContainer :showcontact="showcontact" />
   </v-app>
@@ -37,6 +37,7 @@
 import NavigationDrawer from './components/NavigationDrawer'
 import LoginDialog from './components/login/LoginDialog'
 import ContactContainer from  './components/contacts/ContactContainer'
+import MessageContainer from './components/messages/MessageContainer'
 
 export default {
   name: 'App',
@@ -44,7 +45,8 @@ export default {
   components: {
     NavigationDrawer,
     LoginDialog,
-    ContactContainer
+    ContactContainer,
+    MessageContainer
   },
 
   data: () => ({
