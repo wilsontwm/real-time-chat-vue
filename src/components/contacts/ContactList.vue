@@ -63,7 +63,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions('contactModule', ['allContacts']),
+        ...mapActions('contactModule', ['allContacts'])
     },
     created() {
         // Get all the users

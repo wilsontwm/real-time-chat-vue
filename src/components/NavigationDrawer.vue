@@ -12,36 +12,28 @@
             >
             <Avatar />
             <div class="overline mt-2 mb-2">Recent chats</div>
-            <v-skeleton-loader
-                ref="skeleton"
-                type="list-item-avatar-two-line"
-                class="mx-auto"
-            ></v-skeleton-loader>
-
-            <v-list-item
-            v-for="item in items"
-            :key="item.title"
-            link
-            >
-            <v-list-item-icon>
-                <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-icon>
-
-            <v-list-item-content>
-                <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item-content>
-            </v-list-item>
+            <RoomList v-if="!isRequiresLogin" />
         </v-list>
     </v-navigation-drawer>
 </template>
 <script>
+import { mapState, mapActions } from 'vuex';
 import Avatar from './Avatar'
+import RoomList from './rooms/RoomList'
 
 export default {
     name: "NavigationDrawer",
     props: ['showdrawer'],
     components: {
-        Avatar
+        Avatar, RoomList
+    },
+    computed: {
+        ...mapState('userModule', {
+            userState: state => state.user
+        }),
+        isRequiresLogin: function() {
+            return !this.userState || Object.keys(this.userState).length === 0;
+        }
     },
     data: function() {
         return {

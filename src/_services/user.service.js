@@ -14,7 +14,6 @@ async function get(email) {
                 var id, content;
 
                 snapshot.forEach(doc => {
-                    console.log(doc.id);
                     id = doc.id;
                     content = doc.data();
                 });

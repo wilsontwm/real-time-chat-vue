@@ -15,6 +15,6 @@
 </template>
 <script>
 export default {
-    name: "MessageLoader"
+    name: "ChatLoader"
 }
 </script>

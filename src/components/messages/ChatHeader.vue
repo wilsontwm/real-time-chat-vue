@@ -1,10 +1,10 @@
 <template>
-    <div class="message-header">
-
+    <div class="chat-header">
+        Hello
     </div>
 </template>
 <script>
 export default {
-    name: "MessageHeader"
+    name: "ChatHeader"
 }
 </script>
