@@ -1,8 +1,8 @@
 import { roomService } from '../_services/room.service';
-const state = {activeRoom: null}
+const state = {activeRoom: null, users: []};
 
 const actions = {
-    async selectRoom({commit}, {room, currentUser, targetUser}) {
+    async selectRoom({commit, rootState}, {room, currentUser, targetUser}) {
         // If the room has already been created, then set it as active room (usually triggered from selecting the chat room from left)
         var roomID;
         if(room) {
@@ -21,6 +21,17 @@ const actions = {
             }
         }
 
+        // Get the room detail
+        const response = await roomService.getRoomDetail(room);
+        if(response.success && rootState.contactModule.users) {
+            // Postprocessing on the users
+            var users = rootState.contactModule.users.filter(function(val) {
+                return response.userIds.indexOf(val.id) >= 0;
+            });
+            
+            commit('setUsers', users);
+        }        
+        
         commit('setActiveRoom', roomID);
     },
     clearRoom({commit}) {
@@ -34,6 +45,10 @@ const mutations = {
     },
     clearRoom(state) {
         state.activeRoom = null;
+        state.users = [];
+    },
+    setUsers(state, users) {
+        state.users = users;
     }
 }
 

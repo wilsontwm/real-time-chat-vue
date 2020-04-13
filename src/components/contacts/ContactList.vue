@@ -35,18 +35,20 @@ export default {
             var offlineUsers = [];
             var onlineIds = this.onlineUsers;
 
-            for(var i = 0; i < this.contactState.users.length; i++) {
-                var user = this.contactState.users[i];
-                // For online users
-                if(onlineIds.indexOf(this.contactState.users[i].id) >= 0) {
-                    user.online = true;
-                    onlineUsers.push(user);
-                } else {
-                    // For offline users
-                    user.online = false;
-                    offlineUsers.push(user);
+            if(this.contactState.users) {
+                for(var i = 0; i < this.contactState.users.length; i++) {
+                    var user = this.contactState.users[i];
+                    // For online users
+                    if(onlineIds.indexOf(this.contactState.users[i].id) >= 0) {
+                        user.online = true;
+                        onlineUsers.push(user);
+                    } else {
+                        // For offline users
+                        user.online = false;
+                        offlineUsers.push(user);
+                    }
                 }
-            }
+            }            
 
             return [...onlineUsers, ...offlineUsers];
         },

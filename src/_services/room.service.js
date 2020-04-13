@@ -1,7 +1,7 @@
 import fb from '@/firebase';
 
 export const roomService = {
-    get, createPrivateChat
+    get, createPrivateChat, getRoomDetail
 };
 
 async function get(currentUser, targetUser) {
@@ -11,7 +11,7 @@ async function get(currentUser, targetUser) {
             .get()
             .then(snapshot => {
                 if (snapshot.empty) {
-                    return {success: false, error: "No user(s)"};
+                    return {success: false, error: "No chat room(s)"};
                 }  
                 
                 var roomId;
@@ -38,6 +38,17 @@ async function createPrivateChat(currentUser, targetUser) {
     return fb.firestore.collection("rooms").add(data)
             .then(function(doc) {
                 return {success: true, roomID: doc.id};
+            }).catch(handleError);
+}
+
+async function getRoomDetail(room) {
+    return fb.firestore.collection("rooms").doc(room).get()
+            .then(snapshot => {
+                if (!snapshot.exists) {
+                    return {success: false, error: "No chat room(s)"};
+                }
+                
+                return {success: true, userIds: snapshot.data().users};
             }).catch(handleError);
 }
 

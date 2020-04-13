@@ -19,6 +19,9 @@ export default {
     name: "Room",
     props: ["room", "active"],
     computed: {
+        ...mapState('roomModule', {
+            roomID: state => state.activeRoom
+        }),
         status() {
             return this.active ? "active" : "";
         }
@@ -26,17 +29,20 @@ export default {
     methods: {        
         ...mapActions('roomModule', ['selectRoom', 'clearRoom']),
         selectRoomHandler: function(e) {
-            // Clear the room selection first
-            this.clearRoom();
+            if(this.roomID != this.room.id) {
+                // Clear the room selection first
+                this.clearRoom();
 
-            // Select the room again
-            var data = {
-                room: this.room.id,
-                targetUser: null,
-                currentUser: null
-            };
+                // Select the room again
+                var data = {
+                    room: this.room.id,
+                    targetUser: null,
+                    currentUser: null
+                };
 
-            this.selectRoom(data);
+                this.selectRoom(data);
+            }
+            
         }
     }
 }
