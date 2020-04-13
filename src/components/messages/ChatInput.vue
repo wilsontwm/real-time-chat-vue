@@ -3,7 +3,8 @@
         <v-textarea
           class="message"
           solo
-          rows="3"
+          no-resize
+          rows="2"
           name="message"
           label="Type 'Enter' to send message"
         ></v-textarea>

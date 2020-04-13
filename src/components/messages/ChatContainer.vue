@@ -1,30 +1,19 @@
 <template>
     <div class="chat-container">
-        <ChatLoader v-if="!isLoaded" />
-        <div v-if="isLoaded">
-            Hello
-            <v-footer absolute color="grey lighten-3">
-                <ChatInput />
-            </v-footer>
-        </div>
+        <ChatList />
+        <v-app-bar bottom fixed app height="140" color="grey lighten-2" class="chat-input-container">
+            <ChatInput />
+        </v-app-bar>
     </div>
 </template>
 <script>
-import ChatLoader from './ChatLoader';
 import ChatInput from './ChatInput';
+import ChatList from './ChatList';
 
 export default {
     name: "ChatContainer",
     components: {
-        ChatLoader, ChatInput
-    },
-    data() {
-        return {
-            isLoaded: true
-        }
-    },
-    created() {
-        console.log("Creating the container");
+        ChatInput, ChatList
     }
 }
 </script>
