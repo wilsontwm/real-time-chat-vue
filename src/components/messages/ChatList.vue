@@ -46,7 +46,7 @@ export default {
                         newChats.push(chat);
                     }
                 });
-
+                
                 this.chats = this.chats.concat(newChats);
                 this.isLoaded = true;
             });

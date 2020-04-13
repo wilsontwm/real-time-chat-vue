@@ -38,7 +38,7 @@ export default {
             return this.sender ? this.sender.name : "Unknown";
         },
         datetime: function() {
-            return moment(this.chat.timestamp.toDate()).fromNow();
+            return moment(this.chat.timestamp.toDate()).format("h:mm a, Do MMM YYYY");
         }
     }
 }
