@@ -17,7 +17,7 @@
                 prepend-inner-icon="search"
                 class="mt-2"
             ></v-text-field>
-            <ContactList :searchInput="search" />
+            <ContactList :searchInput="search" />            
         </div>
     </v-navigation-drawer>
 </template>

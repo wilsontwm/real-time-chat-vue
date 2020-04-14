@@ -41,6 +41,15 @@ const actions = {
         const resp = await roomService.sendMessage(sender, room, message);
         return resp;
     },
+    async createChatRoom({commit, rootState}, {userIDs}) {
+        var currentUserID = rootState.userModule.user ? rootState.userModule.user.ID : null;
+        if(currentUserID) {
+            userIDs.push(currentUserID);
+        }
+        
+        const resp = await roomService.createChatRoom(userIDs);
+        return resp;
+    },
     clearRoom({commit}) {
         commit('clearRoom');
     }

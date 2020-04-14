@@ -14,18 +14,21 @@
             <div class="overline mt-2 mb-2">Recent chats</div>
             <RoomList v-if="!isRequiresLogin" />
         </v-list>
+        <RoomDialog />
+        
     </v-navigation-drawer>
 </template>
 <script>
 import { mapState, mapActions } from 'vuex';
 import Avatar from './Avatar'
 import RoomList from './rooms/RoomList'
+import RoomDialog from './rooms/RoomDialog'
 
 export default {
     name: "NavigationDrawer",
     props: ['showdrawer'],
     components: {
-        Avatar, RoomList
+        Avatar, RoomList, RoomDialog
     },
     computed: {
         ...mapState('userModule', {

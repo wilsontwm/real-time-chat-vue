@@ -1,7 +1,7 @@
 import fb from '@/firebase';
 
 export const roomService = {
-    get, createPrivateChat, getRoomDetail, sendMessage
+    get, createPrivateChat, createChatRoom, getRoomDetail, sendMessage
 };
 
 async function get(currentUser, targetUser) {
@@ -63,6 +63,18 @@ async function sendMessage(sender, room, message) {
     return fb.firestore.collection("rooms").doc(room).collection("messages").add(data)
             .then(function(doc) {
                 return {success: true, messageID: doc.id};
+            }).catch(handleError);
+}
+
+async function createChatRoom(userIDs) {
+    var data = {
+        isPrivate: (userIDs.length <= 2),
+        users: userIDs
+    };
+    
+    return fb.firestore.collection("rooms").add(data)
+            .then(function(doc) {
+                return {success: true, roomID: doc.id};
             }).catch(handleError);
 }
 
