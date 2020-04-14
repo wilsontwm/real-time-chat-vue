@@ -40,11 +40,12 @@ const actions = {
             commit('loginFailure', firebaseLogin.error);
         }        
     },
-    logout({commit}) {
-        fb.logout();
-        if(this.state.userModule.user.ID) {
-            userService.logout(this.state.userModule.user.ID);
+    logout({commit, state}) {
+        console.log(state.user.ID);
+        if(state.user.ID) {
+            userService.logout(state.user.ID);
         }
+        fb.logout();
         commit('logout');
     }
 }

@@ -1,10 +1,15 @@
 <template>
-    <div class="message-container">
-        <div class="follow-height" v-if="!isRequiresLogin">
-            <RoomNotSelected v-if="!isRoomSelected" />
-            <ChatContainer v-if="isRoomSelected" />
-        </div>
-    </div>
+    <v-container fluid class="fill-height message-container" v-if="!isRequiresLogin">
+        <v-row
+            justify="center"
+            align="center"
+            v-if="!isRoomSelected"
+        >
+            <v-col class="col-xs-12"><RoomNotSelected /></v-col>
+        </v-row>
+        <ChatContainer v-if="isRoomSelected" />
+        
+    </v-container>
 </template>
 <script>
 import { mapState, mapActions } from 'vuex';
@@ -41,9 +46,6 @@ export default {
 </script>
 <style scoped>
 .message-container {
-    height: 100%;
-}
-.follow-height {
-    height: inherit;
+    padding: 0;
 }
 </style>

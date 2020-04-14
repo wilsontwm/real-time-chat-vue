@@ -10,7 +10,7 @@ const actions = {
         } else {
             // Else check if there is existing chat room created for the user
             const roomResp = await roomService.get(currentUser, targetUser);
-
+            
             if(roomResp.success) {
                 roomID = roomResp.roomID;
             } else {
@@ -22,7 +22,7 @@ const actions = {
         }
 
         // Get the room detail
-        const response = await roomService.getRoomDetail(room);
+        const response = await roomService.getRoomDetail(roomID);
         if(response.success && rootState.contactModule.users) {
             // Postprocessing on the users
             var users = rootState.contactModule.users.filter(function(val) {

@@ -44,8 +44,14 @@ async function login(uid) {
     return fb.firestore.collection("online").doc(uid).set(data);
 }
 
-function logout(uid) {
-    return fb.firestore.collection("online").doc(uid).delete();
+async function logout(uid) {
+    console.log("Logging out " + uid);
+    return fb.firestore.collection("online").doc(uid).delete()
+    .then(function() {
+        console.log("Document successfully deleted!");
+    }).catch(function(error) {
+        console.error("Error removing document: ", error);
+    });
 }
 
 function handleError(error) {

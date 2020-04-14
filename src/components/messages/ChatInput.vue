@@ -37,8 +37,3 @@ export default {
     }
 }
 </script>
-<style scoped>
-.message {
-    width: 100%;
-}
-</style>

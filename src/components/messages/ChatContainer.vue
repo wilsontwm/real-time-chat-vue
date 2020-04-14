@@ -1,9 +1,11 @@
 <template>
-    <div class="chat-container">
-        <ChatList />
-        <v-app-bar bottom fixed app height="140" color="grey lighten-2" class="chat-input-container">
+    <div id="chat-container" class="chat-container">
+        <div id="chat-list-container" class="chat-list-container">
+            <ChatList />
+        </div>
+        <div class="chat-input-container">
             <ChatInput />
-        </v-app-bar>
+        </div>
     </div>
 </template>
 <script>
@@ -19,6 +21,18 @@ export default {
 </script>
 <style scoped>
 .chat-container {
-    height: inherit;
+    width: 100%;
+}
+.chat-list-container {
+    height: calc(100% - 120px);  
+    width: inherit;
+    overflow-y: auto;
+}
+.chat-input-container {
+    background-color: #eeeeee;
+    width: inherit;
+    height: 120px;
+    position: absolute;
+    bottom: 0;
 }
 </style>

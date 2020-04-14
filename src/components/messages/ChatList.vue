@@ -51,6 +51,19 @@ export default {
                 this.isLoaded = true;
             });
         }
+    },
+    mounted() {
+        var element = document.getElementById("chat-container");
+        function resize() {
+            var bodyheight = window.innerHeight - 64;
+            
+            if (typeof(element) != 'undefined' && element != null) {
+                element.style.height = bodyheight + "px";
+            }
+        }
+        
+        window.addEventListener("resize", resize);
+        resize();  
     }
 }
 </script>

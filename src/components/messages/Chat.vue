@@ -40,6 +40,12 @@ export default {
         datetime: function() {
             return moment(this.chat.timestamp.toDate()).format("h:mm a, Do MMM YYYY");
         }
+    },
+    mounted() {
+        var element = document.getElementById("chat-list-container");
+        if (typeof(element) != 'undefined' && element != null) {
+            element.scrollTop = element.scrollHeight;
+        }
     }
 }
 </script>

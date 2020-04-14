@@ -53,13 +53,15 @@ export default {
         }),
         userValues() {
             const values = [];
-            for(var i = 0; i < this.allUsers.length; i++) {
-                var user = this.allUsers[i];
-                if(user.id != this.user.ID) {
-                    var value = {text: user.name, value: user.id};
-                    values.push(value);
+            if(this.user) {
+                for(var i = 0; i < this.allUsers.length; i++) {
+                    var user = this.allUsers[i];
+                    if(user.id != this.user.ID) {
+                        var value = {text: user.name, value: user.id};
+                        values.push(value);
+                    }
                 }
-            }
+            }            
             
             return values;
         }

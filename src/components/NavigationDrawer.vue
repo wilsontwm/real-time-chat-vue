@@ -1,6 +1,6 @@
 <template>
     <v-navigation-drawer
-        v-if="showdrawer"
+        v-modal="showdrawer"
         app
         clipped
         light

@@ -48,7 +48,7 @@ export default {
                 targetUser: this.user.id,
                 currentUser: this.userState.ID
             };
-
+            
             this.selectRoom(data);
         }
     }
