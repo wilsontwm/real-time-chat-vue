@@ -41,7 +41,6 @@ const actions = {
         }        
     },
     logout({commit, state}) {
-        console.log(state.user.ID);
         if(state.user.ID) {
             userService.logout(state.user.ID);
         }

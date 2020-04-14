@@ -83,7 +83,10 @@ export default {
         });
 
         // Get online users
-        fb.firestore.collection("online")
+        let datetime = new Date();
+        datetime.setHours(datetime.getHours() - 1);
+        
+        fb.firestore.collection("online").where('loginAt', '>=', datetime)
         .onSnapshot((snapshot) => {
             const users = [];
             snapshot.forEach((doc) => {

@@ -65,10 +65,6 @@ export default {
             e.preventDefault();
             this.logout();
         }
-    },
-    created() {
-        // Log the user out when exit the window or tab
-        //window.addEventListener('unload', this.handleLogout);
     }
 }
 </script>
