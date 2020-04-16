@@ -5,7 +5,7 @@ This is a real time chat developed using Vue, It allows users to login using the
 Using the Firestore, the real time database, we can achieve real time messaging between users.
 
 ## Screenshot
-
+![Screenshot_2020-04-15 real-time-chat](https://user-images.githubusercontent.com/49806519/79347761-a16eb400-7f66-11ea-9837-1b0962c7cba1.png)
 
 ## Demo
 [Live](https://real-time-chat-wt.web.app/)
